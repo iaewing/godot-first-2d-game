@@ -10,6 +10,7 @@ public partial class Player : Area2D
     public override void _Ready()
     {
         ScreenSize = GetViewportRect().Size;
+		Hide();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -54,5 +55,17 @@ public partial class Player : Area2D
             x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
             y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
         );
+
+        if (velocity.X != 0)
+        {
+            animatedSprite2D.Animation = "walk";
+            animatedSprite2D.FlipV = false;
+            animatedSprite2D.FlipH = velocity.X < 0;
+        }
+        else if (velocity.Y != 0)
+        {
+            animatedSprite2D.Animation = "up";
+            animatedSprite2D.FlipV = velocity.Y > 0;
+        }
     }
 }
