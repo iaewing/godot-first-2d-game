@@ -10,7 +10,7 @@ public partial class Player : Area2D
 
     public Vector2 ScreenSize;
 
-    private void OnBodyEntered(PhysicsBody2D body)
+    private void OnPlayerBodyEntered(PhysicsBody2D body)
     {
         Hide();
         EmitSignal(SignalName.Hit);

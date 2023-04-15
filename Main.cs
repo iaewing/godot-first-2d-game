@@ -10,6 +10,7 @@ public partial class Main : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        NewGame();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,8 +46,23 @@ public partial class Main : Node
         GetNode<Timer>("ScoreTimer").Start();
     }
 
-	private void OnMobTimerTimeout()
-	{
-		
-	}
+    private void OnMobTimerTimeout()
+    {
+        Mob mob = MobScene.Instantiate<Mob>();
+
+        PathFollow2D mobSpawnLocation = GetNode<PathFollow2D>("MobPath/MobSpawnLocation");
+        mobSpawnLocation.ProgressRatio = GD.Randf();
+
+        float direction = mobSpawnLocation.Rotation + Mathf.Pi / 2;
+
+        mob.Position = mobSpawnLocation.Position;
+
+        direction += (float)GD.RandRange(-Mathf.Pi / 4, Mathf.Pi / 4);
+        mob.Rotation = direction;
+
+        Vector2 velocity = new Vector2((float)GD.RandRange(150.0, 250.0), 0);
+        mob.LinearVelocity = velocity.Rotated(direction);
+
+        AddChild(mob);
+    }
 }
