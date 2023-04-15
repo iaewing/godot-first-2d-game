@@ -19,8 +19,8 @@ public partial class Main : Node
 
     public void GameOver()
     {
-        GetNode<AudioStreamPlayer>("Music").Stop();
-        GetNode<AudioStreamPlayer>("DeathSound").Play();
+        GetNode<AudioStreamPlayer2D>("Music").Stop();
+        GetNode<AudioStreamPlayer2D>("DeathSound").Play();
         GetNode<Timer>("MobTimer").Stop();
         GetNode<Timer>("ScoreTimer").Stop();
 
@@ -33,7 +33,7 @@ public partial class Main : Node
         GetTree().CallGroup("mobs", Node.MethodName.QueueFree);
 
         _score = 0;
-        GetNode<AudioStreamPlayer>("Music").Play();
+        GetNode<AudioStreamPlayer2D>("Music").Play();
 
         Player player = GetNode<Player>("Player");
         Marker2D startPostiion = GetNode<Marker2D>("StartPosition");
